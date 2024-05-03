@@ -163,6 +163,7 @@ cython_debug/
 
 ###Custom
 !.gitkeep
-
+*.pt
+runs/
 SampleDataset/*
 Repositories/*

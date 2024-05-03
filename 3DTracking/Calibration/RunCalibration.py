@@ -15,8 +15,7 @@ from glob import glob
 import os
 import pickle
 
-
-def main():
+if __name__ == "__main__":
     InputDir = "../SampleDataset/Calibration/videos" ##Input directory to videos
     DataDir = "../SampleDataset/Calibration/data"
     CamNames = ["mill1","mill2","mill3","mill4","mill5","mill6"] #Camera Names
@@ -49,10 +48,6 @@ def main():
     ExtrinsicCalibration.AutoExtrinsicCalibrator(VideoPaths,DataDir,None,CalibBoardDict,
                                                  CamNames,imsize,PrimaryCamera=0,Undistort=True)
     
-    ExtrinsicCalibration.GetReprojectErrors(CamNames,DataDir,Optimized=False)
+    ExtrinsicCalibration.GetReprojectErrors(CamNames,DataDir,VideoName=None)
 
 
-
-
-if __name__ == "__main__":
-    main()

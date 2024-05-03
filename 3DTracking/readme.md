@@ -42,11 +42,11 @@ pip install opencv-contrib-python==4.5.5.64
 
 ```
 
-## Network Training and Annotations
+## 1. Network Training and Annotations
 We provide the bounding box + keypoint estimation datasets used in 3D-SOCS and sample scripts to read the dataset, and do network training. Make sure the dataset is [downloaded](), and placed in the `Dataset/` folder in the repository.
 
 ### Annotation Reader
-We provide a [data reader script](NetworkTraining/AnnotationReader.py) to read in the bounding box and keypoint annotations. The annotation reader can also be used for other datasets annotated using [label-studio](https://labelstud.io/), and exporting using the "JSON_MIN" option.
+We provide a [data reader script](NetworkTraining/AnnotationReader.py) to read in the bounding box and keypoint annotations. The annotation reader can also be used for other datasets annotated using [label-studio](https://labelstud.io/), exported using the "JSON_MIN" option.
 
 
 To get example annotations and visualization, run the following:
@@ -73,7 +73,7 @@ Then run the following to train the model, the weights are automatically saved a
 python NetworkTraining/DLC_Train.py
 ```
 
-## Calibration
+## 2. Calibration
 We provide scripts to do multi-view intrinsic and extrinsic calibration. The script requires multi-view synchronized videos from 3D-SOCS as input. We only support calibration using [ChArUco checkerboards](https://docs.opencv.org/3.4/df/d4a/tutorial_charuco_detection.html). You can generate a custom checkerboard with a custom size and specification [online](https://calib.io/pages/camera-calibration-pattern-generator).
 
 We provide a sample calibration sequence in the [sample dataset]() repository.
@@ -88,7 +88,7 @@ Final calibration parameters are stored under `data/` directory within the calib
 If you are using your own sequences or ChArUco board, make sure to modify the paths and board specification from L20 - L36
 
 
-## 3D Inference
+## 3. 3D Inference
 Finally, we provide scripts to do 3D inference and all post-processing steps reported in 3D-SOCS. We provided a sample sequence taken from 3D-SOCS for demonstrating the scripts. Make sure the [sample dataset and weights]() are downloaded and placed in the appropriate folder.
 
 To run the 3D tracking pipeline, run:

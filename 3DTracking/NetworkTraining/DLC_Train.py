@@ -40,7 +40,7 @@ def Train_DLC(DLC_ConfigPath, BatchSize = 32, Optimizer = "adam"):
 
 if __name__ == "__main__":
     ##Specify absolute path to DLC folder and batch size!!
-    Path = "/home/alexchan/Documents/3D-SOCS/SampleDataset/Dataset/DLC_Dataset"
+    Path = "/home/alexchan/Documents/3D-SOCS/SampleDataset/KPDataset/DLC_Dataset"
     Batch = 32
 
     DLC_ConfigPath = os.path.join(Path,"config.yaml")

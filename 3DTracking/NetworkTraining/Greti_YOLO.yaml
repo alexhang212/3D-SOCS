@@ -1,4 +1,4 @@
-path: /home/alexchan/Documents/3D-SOCS/SampleDataset/Dataset/YOLO_Dataset ##Change absolute path!
+path: /home/alexchan/Documents/3D-SOCS/SampleDataset/KPDataset/YOLO_Dataset ##Change absolute path!
 train: ./train
 val: ./val
  
