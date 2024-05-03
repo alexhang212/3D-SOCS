@@ -1,0 +1,9 @@
+path: /home/alexchan/Documents/3D-SOCS/SampleDataset/Dataset/YOLO_Dataset ##Change absolute path!
+train: ./train
+val: ./val
+ 
+# class names
+names: 
+  0: 'greti'
+  1: 'bluti'
+  2: 'head'
