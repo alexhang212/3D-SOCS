@@ -1,4 +1,4 @@
-# 3D-SOCS:  Synchronized video capture and 3D reconstruction of wild passerines
+# Peering into the world of wild passerines with 3D-SOCS: synchronized video capture for posture estimation
 
 
 **Michael Chimento\***, ***Alex Hoi Hang Chan\***, Lucy M. Aplin, and Fumihiro Kano.
@@ -19,6 +19,11 @@ Directory  | Description
 3DTracking | Python code and instructions for 3D posture tracking pipeline from video data.
 equipment_list.ods | List of hardware used in the manuscript.
 
+## Sample Video
+
+![SampleVideo](./media/bird_3B00186CDA_trial_32_time_2023-11-05%2010_30_28.117871_VisualField_sample.mp4)
+
+
 ## Citation
 ```
 
@@ -28,3 +33,6 @@ If you have any questions or problems with the code, feel free to raise a github
 
 - **Michael Chimento**: mchimento[at]ab.mpg.de
 - **Alex Chan**: hoi-hang.chan[at]uni-konstanz.de
+
+## Acknowledgement
+This work was supported by the Max Planck Society and the Centre for the Advanced Study of Collective Behaviour, funded by the Deutsche Forschungsgemeinschaft (DFG) under Germany’s Excellence Strategy (EXC 2117-422037984). LMA and MC were also partly funded by the Swiss State Secretariat for Education, Research and Innovation (SERI) under contract number MB22.00056.

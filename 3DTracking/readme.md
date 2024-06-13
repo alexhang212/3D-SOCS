@@ -4,7 +4,7 @@
 
 Here are all scripts and requirements for the 3D tracking pipeline in 3D-SOCS.
 
-All scripts are set up to run for 1 sample trial (a set of synchronized videos captured by 3D-SOCS). You can freely adapt the code to run over your own data. Use this [link]() to download the sample dataset to run the code provided
+All scripts are set up to run for 1 sample trial (a set of synchronized videos captured by 3D-SOCS). You can freely adapt the code to run over your own data. Use this [link](https://doi.org/10.17617/3.ZQMOJ3) to download the sample dataset to run the code provided
 
 **Here are the seperate parts for the 3D tracking pipeline:**
 - Annotation and Network Training
@@ -36,6 +36,7 @@ pip install deeplabcut==2.3.3
 pip install ultralytics==8.0.143
 pip install tensorflow==2.4.0
 pip install numpy==1.23.5
+pip install typing-extensions --upgrade
 
 pip uninstall opencv-python
 pip install opencv-contrib-python==4.5.5.64
@@ -43,7 +44,7 @@ pip install opencv-contrib-python==4.5.5.64
 ```
 
 ## 1. Network Training and Annotations
-We provide the bounding box + keypoint estimation datasets used in 3D-SOCS and sample scripts to read the dataset, and do network training. Make sure the dataset is [downloaded](), and placed in the `Dataset/` folder in the repository.
+We provide the bounding box + keypoint estimation datasets used in 3D-SOCS and sample scripts to read the dataset, and do network training. Make sure the dataset is [downloaded](https://doi.org/10.17617/3.ZQMOJ3), and placed in the `Dataset/` folder in the repository.
 
 ### Annotation Reader
 We provide a [data reader script](NetworkTraining/AnnotationReader.py) to read in the bounding box and keypoint annotations. The annotation reader can also be used for other datasets annotated using [label-studio](https://labelstud.io/), exported using the "JSON_MIN" option.
@@ -76,7 +77,7 @@ python NetworkTraining/DLC_Train.py
 ## 2. Calibration
 We provide scripts to do multi-view intrinsic and extrinsic calibration. The script requires multi-view synchronized videos from 3D-SOCS as input. We only support calibration using [ChArUco checkerboards](https://docs.opencv.org/3.4/df/d4a/tutorial_charuco_detection.html). You can generate a custom checkerboard with a custom size and specification [online](https://calib.io/pages/camera-calibration-pattern-generator).
 
-We provide a sample calibration sequence in the [sample dataset]() repository.
+We provide a sample calibration sequence in the [sample dataset](https://doi.org/10.17617/3.ZQMOJ3).
 
 To run calibration on the sample calibration sequence, run:
 ```
@@ -89,7 +90,7 @@ If you are using your own sequences or ChArUco board, make sure to modify the pa
 
 
 ## 3. 3D Inference
-Finally, we provide scripts to do 3D inference and all post-processing steps reported in 3D-SOCS. We provided a sample sequence taken from 3D-SOCS for demonstrating the scripts. Make sure the [sample dataset and weights]() are downloaded and placed in the appropriate folder.
+Finally, we provide scripts to do 3D inference and all post-processing steps reported in 3D-SOCS. We provided a sample sequence taken from 3D-SOCS for demonstrating the scripts. Make sure the [sample dataset and weights](https://doi.org/10.17617/3.ZQMOJ3) are downloaded and placed in the appropriate folder.
 
 To run the 3D tracking pipeline, run:
 ```

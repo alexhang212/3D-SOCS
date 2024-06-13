@@ -39,4 +39,4 @@ if __name__ == "__main__":
 
     Visualize3D_VS(Out3DDict,DataDir, VideoFiles,CamNames,FrameDiffs=[0]*len(CamNames),
                    startFrame=0,TotalFrames=-1,VisualizeIndex=2,ColourDictionary=ColourDictionary,
-                   Extrinsic = "Initial",show=True,save=False,VSAngle=60,ElvAngle=0, Magnitude = 3)
+                   Extrinsic = "Initial",show=True,save=True,VSAngle=60,ElvAngle=0, Magnitude = 3)

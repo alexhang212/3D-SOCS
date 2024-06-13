@@ -167,3 +167,5 @@ cython_debug/
 runs/
 SampleDataset/*
 Repositories/*
+*.zip
+*/*.mp4

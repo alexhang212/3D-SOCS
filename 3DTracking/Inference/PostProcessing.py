@@ -45,7 +45,7 @@ if __name__ == "__main__":
     Out3DDictKeysFlat = []
     [Out3DDictKeysFlat.extend(x) for x in Out3DDictKeys]
     UnqIDs = sorted(list(set([x.split("_")[0] for x in list(set(Out3DDictKeysFlat))])))
-    SpeciesObjectDict = pickle.load(open(os.path.join(InputDir,"MedianSpeciesObjects.p"),"rb"))
+    SpeciesObjectDict = pickle.load(open(os.path.join(InputDir,"MedianSpeciesObjects.p"),"rb")) #Median skeleton for species!
 
 
     # import ipdb;ipdb.set_trace()
