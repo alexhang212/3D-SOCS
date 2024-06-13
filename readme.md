@@ -22,11 +22,10 @@ equipment_list.ods | List of hardware used in the manuscript.
 ## Sample Video
 
 
-
-
-
-<video src="https://github.com/alexhang212/3D-SOCS/assets/57260510/c693e962-dca2-48e9-9405-7fc76c2f6ba7" width="300" />
-
+<figure class="video_container">
+  <iframe src="media/bird_3B00186CDA_trial_32_time_2023-11-05 10_30_28.117871_VisualField_sample.mp4" frameborder="0" allowfullscreen="true"> 
+</iframe>
+</figure>
 
 
 ## Citation
