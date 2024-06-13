@@ -1,7 +1,7 @@
 # 3D-SOCS:  Synchronized video capture and 3D reconstruction of wild passerines
 
 
-**Michael Chimento\***, ***Alex Hoi Hang Chan\***, Lucy M. Aplin, and Fumihiro Kano
+**Michael Chimento\***, ***Alex Hoi Hang Chan\***, Lucy M. Aplin, and Fumihiro Kano.
 **Bold denotes co-first authorship**.
 ![Banner](./media/3DSOCS_Banner.jpeg)
 
