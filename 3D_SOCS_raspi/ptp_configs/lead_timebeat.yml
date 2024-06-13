@@ -1,0 +1,498 @@
+#              ______ _                   __                  __
+#             /_  __/(_)____ ___   ___   / /_   ___   ____ _ / /_
+#              / /  / // __ `__ \ / _ \ / __ \ / _ \ / __ `// __/
+#             / /  / // / / / / //  __// /_/ //  __// /_/ // /_
+#            /_/  /_//_/ /_/ /_/ \___//_.___/ \___/ \__,_/ \__/
+
+################### Timebeat Configuration AREA #########################
+
+timebeat:
+
+  # Location of license key file for premium features
+  license.keyfile: '/etc/timebeat/timebeat.lic'
+
+  # Configuration for clock synchronisation
+  clock_sync:
+
+    # Clocksync
+
+    # Default is true enabling clock synchronisation, setting to false for monitoring purposes only (false will not adjust the clock)
+    adjust_clock: true
+
+    # To remove step limit restrictions comment out the below, this will allow the clock to be stepped indefinitely
+    #step_limit: 15m # "s", "h" "d" can be used to denominate seconds, hours or days for step limit.
+
+    primary_clocks:
+
+      # PTP Config example
+      - protocol:                ptp
+        domain:                  0
+        #serve_unicast:          true  # (Enterprise Feature)
+        serve_multicast:        true  # (Enterprise Feature)
+        server_only:            true  # (Enterprise Feature)
+        announce_interval:       1
+        sync_interval:           0
+        delayrequest_interval:   0
+        #unicast_master_table:   ['1.2.3.4','2.3.4.5', '3.4.5.6']
+        #delay_strategy:         e2e   # other options which can be used are: 'p2p'
+        #hybrid_e2e:             false # Send delay requests as unicast (enterprise profile)
+        #priority1:              128
+        #priority2:              128
+        #monitor_only:           false
+        #use_layer2:             false      # Use ptp over ethernet instead of IP/UDP
+        interface:               eth0
+        #profile:                'G.8275.2' # other options which can be used are: 'G.8275.1', 'G.8265.1' and 'enterprise-draft'
+        #logsource:              'lead_CM4' # configurable name for source included in all logging records for source
+        #asymmetry_compensation: 0 # In nanoseconds. Static compensation for know asymmetry (+/- as the case maybe)
+
+      # PTP Config example
+      #- protocol:               ptp
+      #  domain:                 10
+      #  serve_unicast:          true
+      #  serve_multicast:        true
+      #  server_only:            true
+      #  announce_interval:      1
+      #  sync_interval:          0
+      #  delayrequest_interval:  0
+      #  unicast_master_table:   ['1.2.3.4','2.3.4.5', '3.4.5.6']
+      #  delay_strategy:         e2e
+      #  priority1:              128
+      #  priority2:              128
+      #  monitor_only:           false
+      #  interface:              enp2s0
+
+      # NTP Config example
+      #- protocol:      ntp
+      #  ip:            '1.2.3.4'  # You can also use name formate e.g: time.server.com
+      #  pollinterval:  4s # Values tested: 500ms, 1s, 2s, 4s and 8s  # 4s is recommended for public NTP servers
+      #  monitor_only:  false
+
+      # Pulse-per-second input config example  (ENTERPRISE FEATURE) PPS can be configured using Timebeat CLI
+      - protocol:     pps
+        interface:    eth0
+        pin:          0
+        index:        0
+        cable_delay:  0
+        #utc_offset: 37          # Cable delay in nanoseconds (odds are ~5 ns per meter is a good value)
+      #  monitor_only: false
+
+
+    # Secondary clocks. When all primary sources are unavailable the below will activate (ENTERPRISE FEATURE)
+
+    secondary_clocks:
+
+      # PTP Config example
+      #- protocol:              ptp
+      #  domain:                0
+      #  serve_unicast:         true  # (Enterprise Feature)
+      #  serve_multicast:       true  # (Enterprise Feature)
+      #  server_only:           true  # (Enterprise Feature)
+      #  announce_interval:     1
+      #  sync_interval:         0
+      #  delayrequest_interval: 0
+      #  unicast_master_table:  ['1.2.3.4','2.3.4.5', '3.4.5.6']
+      #  delay_strategy:        e2e  # (Enterprise Feature)  - other options which can be used are: 'p2p'
+      #  priority1:             128  # (Enterprise Feature)
+      #  priority2:             128  # (Enterprise Feature)
+      #  monitor_only:          false
+      #  interface:             enp2s0
+
+      # PTP Config example
+      #- protocol:              ptp
+      #  domain:                10
+      #  serve_unicast:         true
+      #  serve_multicast:       true
+      #  server_only:           true
+      #  announce_interval:     1
+      #  sync_interval:         0
+      #  delayrequest_interval: 0
+      #  unicast_master_table: ['1.2.3.4','2.3.4.5', '3.4.5.6']
+      #  delay_strategy:        e2e
+      #  priority1:             128
+      #  priority2:             128
+      #  monitor_only:          false
+      #  interface:             enp2s0
+
+      # NTP Config example
+      #- protocol:      ntp
+      #  ip:            '1.2.3.4'  # You can also use name formate e.g: ntp.time.server.com
+      #  pollinterval:  4s # Values tested: 500ms, 1s, 2s, 4s and 8s  # 4s is recommended for public NTP servers
+      #  monitor_only:  false
+
+
+      # NMEA-GNSS input config example (can provide majortime for PPS sources)
+      # Eight data bits, no parity bit, and one stop bit (8N1) is assumed
+      # (It is not recommended to configure a NMEA source if you have an alternative secondary source) (ENTERPRISE FEATURE)
+      - protocol:     timecard-mini
+        device:       '/dev/serial0'
+        baud:         9600
+        offset: 37
+        monitor_only: false
+
+    # Timebeat can monitor external devices - currently Arista switches acting as  boundary clocks
+    # using the eAPI and the Orolia/Spectracom SecureSync grandmaster clocks using its REST API
+    external_devices:
+
+      #- vendor:                arista_eos
+      #  host:                  10.101.101.47
+      #  port:                  443
+      #  transport:             https
+      #  username:              admin
+      #  password:              12345678
+
+      #- vendor:                orolia_securesync
+      #  host:                  10.101.101.48
+      #  port:                  80
+      #  transport:             http
+      #  username:              spadmin
+      #  password:              12345678
+
+    ptpsquared:
+
+      # Enable PTPSquared functionality
+      # enable:                false
+
+      # discovery:
+      #   mdns:                true
+      #   dht:                 false
+      #   dht_seed_list:       ["/ip4/10.101.101.23/tcp/65107/p2p/16Uiu2HAmJiQvJQbja8pf5dKAZsSYxWmcDCxZaoYbMUL5X7GnXej9"]
+
+      # keypath:               "/etc/timebeat/ptp2key.private"
+
+      # domains:               [115,116]
+
+      # interface:             ens5f0
+
+      # seats_to_offer:        4 # Number of seats available to consume time from this node
+      # seats_to_fill:         3 # Number of seats this node seeks to fill from other nodes to consume time
+      # concurrent_sources:    1 # Number of concurrent PTP sources used to steer our clock(s)
+
+      # active_sync_interval:         -3 # sync interval for active sources
+      # active_delayrequest_interval: -3 # delay request interval for active sources
+      # monitor_sync_interval:         0 # sync interval for sources we monitor
+      # monitor_delayrequest_interval: 0 # delay request interval for sources we monitor
+
+      # capabilities:          ["hqosc-1500"] # high-quality oscillator 1.5us drift per 24 hours
+      # preference_score:      0                               # Used when requesting capacity from reservations
+      # reservations:          ["1500:50%:115,116", "750:25%"] # List containing client seat reservations:
+                                                               #   :
+                                                               #   :
+                                                               #  
+
+      # debug:                 false # debug logging specifically for ptpsquared
+
+      # advanced:
+
+      #   asymmetry_compensation: 0 # In nanoseconds. Static compensation for know asymmetry (+/- as the case maybe). All interfaces
+
+      #   is_better_factor:      1.4 # How much "better" does a source need to be to be selected instead of a current source
+      #   eos_weight:            1.0 # Weight attributed to error of source std dev calculation in determining hop cost
+
+      # All costs below default to zero which infers that cumulative error of source is the only factor
+      # determining the cost of a particular time source path
+      #   base_hop_cost:         0.0 # The default cost of a single hop to downstream peers
+      #   swts_cost:             0.0 # The cost of using software timestamping
+      #   hwts_cost:             0.0 # The cost of using hardware timestamping
+
+
+      # In nanoseconds. Static compensation for know asymmetry (+/- as the case maybe). All interfaces
+      #   latency_analysis_enable: false
+    #
+    #    _______________________________________
+    #   / Below are the advanced configurations \
+    #   | change at own risk, please refer to   |
+    #   \ documentation guides for detail       /
+    #    ---------------------------------------
+    #                   \                    ^    /^
+    #                    \                  / \  // \
+    #                     \   |\___/|      /   \//  .\
+    #                      \  /O  O  \__  /    //  | \ \           *----*
+    #                        /     /  \/_/    //   |  \  \          \   |
+    #                        @___@`    \/_   //    |   \   \         \/\ \
+    #                       0/0/|       \/_ //     |    \    \         \  \
+    #                   0/0/0/0/|        \///      |     \     \       |  |
+    #                0/0/0/0/0/_|_ /   (  //       |      \     _\     |  /
+    #             0/0/0/0/0/0/`/,_ _ _/  ) ; -.    |    _ _\.-~       /   /
+    #                         ,-}        _      *-.|.-~-.           .~    ~
+    #        \     \__/        `/\      /                 ~-. _ .-~      /
+    #         \____(oo)           *.   }            {                   /
+    #         (    (--)          .----~-.\        \-`                 .~
+    #         //__\\  \__ Ack!   ///.----..<        \             _ -~
+    #        //    \\               ///-._ _ _ _ _ _ _{^ - - - - ~
+    #
+    #(THE BELOW ADVANCED OPTIONS ARE ENTERPRISE FEATURES)
+    advanced:
+
+      # Steering Algorithm Options
+      steering:
+
+        # Several algorithms are available :
+        #
+        # alpha, beta, gamma, rho & sigma
+        # Most likely you will want the sigma algo in a reasonably noise
+        # free (low jitter / low network congestion) environment. In a less than
+        # ideal environment with hardware timestamping rho may be better depending
+        # on the circumstances. If your servers don't support hardware timestamping,
+        # then go for the sigma algo as well.
+        #
+        # algo: sigma
+
+        # Log steering algo constituents
+        # algo_logging: false
+
+        # Enable the external outlier filter
+        # outlier_filter_enabled: true
+
+        # Several outlier filter types are available
+        # "strict", "moderate" and "relaxed"
+        # outlier_filter_type: strict
+
+        # Allow offset arrival based servo
+        # servo_offset_arrival_driven: true
+
+      # In the event an alternative system adjusts the clock, timebeat will cease active operation and transition into monitoring mode.
+      # period of time defined in the value below
+      interference_monitor:
+        backoff_timer: 5m
+
+      # Slewing is active only when the offset is less than the step boundary,
+      # If the offset is less than the step limit but greater than the step boundary time will be stepped and not slewed,
+      # The step boundary cannot exceed the step limit, it is able to be equal to,
+      # If the offset is greater than both step limit and step boundary the clock will not be synchronised, neither stepping or slewing will take place,
+      # Any change to the below configuration will overide the default/configured limits above.
+      extended_step_limits:
+
+        #forward:
+          #boundary: 500ms
+          #limit: 15m
+        #backward:
+          #boundary: 500ms
+          #limit: 15m
+
+      windows_specific:
+
+        # Default is true, setting configuration to false will alter the Windows Timer Resolution, Default of true sets the Timer Resolution to a fine value.
+        # disable_os_relax: true
+
+      linux_specific:
+
+        # Enable hardware timestamping on Linux SOF_TIMESTAMPING_(R|T)X_HARDWARE
+        # (setting this to false will also disable steering based on PPS)
+         hardware_timestamping: true
+
+        # Enable external software timestamping on Linux SOF_TIMESTAMPING_(R|T)X_SOFTWARE
+        # external_software_timestamping: true
+
+        # Synchronise non-master PHC (nic) clocks on Linux
+         sync_nic_slaves: true
+
+        # Don't synchronise these clocks on Linux
+        # disable_adjustment: ['system', 'ens1', 'enp2s0']
+
+        # Fixed PHC offset strategy (default order of preference is 1st: precise, 2nd: extended,
+        # 3rd: pps, 4th: basic). List of ":"
+        # phc_offset_strategy: ["ens1:pps"]
+
+        # PHC smoothing mechanism. Defaults to "minimum". Other option is "median". List of ":"
+        # phc_smoothing_strategy: ["ens1:median"]
+
+        # Enable the internal modified lucky packet PHC outlier filter
+        # phc_lp_filter_enabled: false
+
+        # Enable the internal none-Gausian PHC outlier filter
+        # phc_ng_filter_enabled: false
+
+        # Interface specific PHC samples to determine offset from system clock (default is 15: list of ":")
+        # phc_samples: ["ens5f0np0:5"]
+
+      ptp_tuning:
+
+        # Enable PTP sockets that bind to all interfaces. If disabled interface parameter
+        # must be specified in the time source configuration
+        # enable_ptp_global_sockets: true
+
+        # Randomly delay DELAY_REQ packets by 200-800ms from receipt of SYNC packets
+        # (this option will be forced true for multicast sources irrespective of the value below)
+        # relax_delay_requests: true
+
+        # When auto discover is enabled, ptp multicast sources will automatically be configured
+        # as secondary sources based on received announce messages if no explicit configuration
+        # in the domain exist.
+        # auto_discover_enabled: true
+
+      cli:
+
+        # Enable the SSH based CLI interface. I.e. to access: ssh -p 65129 admin@127.0.0.1
+        # enable: false
+        # bind_port: 65129
+        # bind_host: 127.0.0.1
+
+        # Server SSH key. If path specified key will be loaded or generated. Otherwise key will be random on startup
+        # server_key: "/etc/timebeat/cli_id_rsa"
+
+        # Authorised SSH keys (yes... with an s not a z....)
+        # authorised_keys: "/etc/timebeat/authorised_keys"
+
+        # CLI username and password
+        # username: "admin"
+        # password: "password"
+
+
+
+# ================================== General ===================================
+
+# The name of the shipper that publishes the network data. It can be used to group
+# all the transactions sent by a single shipper in the web interface.
+#name:
+
+# The tags of the shipper are included in their own field with each
+# transaction published.
+#tags: ["service-X", "web-tier"]
+
+# Optional fields that you can specify to add additional information to the
+# output.
+#fields:
+#  env: staging
+
+# ================================= Dashboards =================================
+# These settings control loading the sample dashboards to the Kibana index. Loading
+# the dashboards is disabled by default and can be enabled either by setting the
+# options here or by using the `setup` command.
+setup.dashboards.enabled: false
+
+# The URL from where to download the dashboards archive. By default this URL
+# has a value which is computed based on the Beat name and version. For released
+# versions, this URL points to the dashboard archive on the artifacts.elastic.co
+# website.
+#setup.dashboards.url:
+
+#windows directory path:
+#setup.dashboards.directory: ${path.home}\kibana
+
+#Linux directory path:
+#setup.dashboards.directory: ${path.home}/kibana
+
+# ================================== Outputs ===================================
+
+# Configure what output to use when sending the data collected by the beat.
+
+# Configure what output to use when sending the data collected by the beat.
+
+# -------------------------------- File Output ---------------------------------
+output.file:
+  # Boolean flag to enable or disable the output module.
+  enabled: false
+
+  # Configure JSON encoding
+  codec.json:
+    # Pretty-print JSON event
+    pretty: true
+
+  # Path to the directory where to save the generated files. The option is
+  # mandatory.
+  path: "/tmp/timebeat"
+
+  # Name of the generated files. The default is `timebeat` and it generates
+  # files: `timebeat`, `timebeat.1`, `timebeat.2`, etc.
+  filename: timebeat
+
+# ---------------------------- Elasticsearch Output ----------------------------
+output.elasticsearch:
+  #enabled: false
+  # Array of hosts to connect to.
+  # hosts: ['YourIPGoesHere'] # insert ip address of your elastic server
+
+  # Protocol - either `http` (default) or `https` (https is required for timebeat cloud).
+  #protocol: 'https'
+
+  # Authentication credentials - either API key or username/password. Must match your elastic details, only applicable if configured in elastic.
+  #api_key: 'id:api_key'
+  #username: 'elastic'
+  #password: 'changeme'
+
+# Timebeat Cloud PKI connectivity details
+
+  # ssl.certificate_authorities: ['/etc/timebeat/pki/ca.crt']
+  # ssl.certificate: '/etc/timebeat/pki/timebeat.crt'
+  # ssl.key: '/etc/timebeat/pki/timebeat.key'
+  # ssl.verification_mode: "certificate"
+
+# setup.ilm.rollover_alias: "timebeat"
+
+# ================================== Logging ===================================
+
+# There are four options for the log output: file, stderr, syslog, eventlog
+# The file output is the default.
+
+# Sets log level. The default log level is info.
+# Available log levels are: error, warning, info, debug
+#logging.level: info
+
+# If enabled, Timebeat periodically logs its internal metrics that have changed
+# in the last period. For each metric that changed, the delta from the value at
+# the beginning of the period is logged. Also, the total values for
+# all non-zero internal metrics are logged on shutdown. The default is true.
+#logging.metrics.enabled: true
+
+# The period after which to log the internal metrics. The default is 30s.
+#logging.metrics.period: 30s
+
+# Logging to rotating files. Set logging.to_files to false to disable logging to
+# files.
+logging.to_files: true
+logging.files:
+  # Configure the path where the logs are written. The default is the logs directory
+  # under the home path (the binary location).
+  path: /var/log/timebeat
+
+  # The name of the files where the logs are written to.
+  name: CM4_lead
+
+  # Configure log file size limit. If limit is reached, log file will be
+  # automatically rotated
+  rotateeverybytes: 10485760 # = 10MB
+
+  # Number of rotated log files to keep. Oldest files will be deleted first.
+  keepfiles: 7
+
+  # The permissions mask to apply when rotating log files. The default value is 0600.
+  # Must be a valid Unix-style file permissions mask expressed in octal notation.
+  permissions: 0600
+
+  # Enable log file rotation on time intervals in addition to size-based rotation.
+  # Intervals must be at least 1s. Values of 1m, 1h, 24h, 7*24h, 30*24h, and 365*24h
+  # are boundary-aligned with minutes, hours, days, weeks, months, and years as
+  # reported by the local system clock. All other intervals are calculated from the
+  # Unix epoch. Defaults to disabled.
+  #interval: 0
+
+  # Rotate existing logs on startup rather than appending to the existing
+  # file. Defaults to true.
+  # rotateonstartup: true
+# ============================== Process Security ==============================
+
+# Disable the filtering of syscalls as we require system clock access
+seccomp.enabled: false
+
+# ============================= X-Pack Monitoring ==============================
+# Timebeat can export internal metrics to a central Elasticsearch monitoring
+# cluster.  This requires xpack monitoring to be enabled in Elasticsearch.  The
+# reporting is disabled by default.
+
+# Set to true to enable the monitoring reporter.
+monitoring.enabled: true
+
+# Sets the UUID of the Elasticsearch cluster under which monitoring data for this
+# Timebeat instance will appear in the Stack Monitoring UI. If output.elasticsearch
+# is enabled, the UUID is derived from the Elasticsearch cluster referenced by output.elasticsearch.
+#monitoring.cluster_uuid:
+
+# Uncomment to send the metrics to Elasticsearch. Most settings from the
+# Elasticsearch output are accepted here as well.
+# Note that the settings should point to your Elasticsearch *monitoring* cluster.
+# Any setting that is not set is automatically inherited from the Elasticsearch
+# output configuration, so if you have the Elasticsearch output configured such
+# that it is pointing to your Elasticsearch monitoring cluster, you can simply
+# uncomment the following line.
+monitoring.elasticsearch:
+
