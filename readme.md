@@ -21,7 +21,7 @@ equipment_list.ods | List of hardware used in the manuscript.
 
 ## Sample Video
 
-![SampleVideo](./media/bird_3B00186CDA_trial_32_time_2023-11-05%2010_30_28.117871_VisualField_sample.mp4)
+https://github.com/alexhang212/3D-SOCS/assets/57260510/93e5bb64-2e3d-4fe3-a35b-d8018c9a0c36
 
 
 ## Citation
