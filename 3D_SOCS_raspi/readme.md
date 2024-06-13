@@ -1,6 +1,6 @@
 # Code for operating 3D-SOCS
 
-![Banner](./media/Fig_SX_3DSOCS_hardware.png)
+![Banner](../media/Fig_SX_3DSOCS_hardware.png)
 
 ## Contents
 Directory  | Description
