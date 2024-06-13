@@ -1,15 +1,21 @@
 # 3D-SOCS:  Synchronized video capture and 3D reconstruction of wild passerines
 
 
-**Michael Chimento\***, ***Alex Hoi Hang Chan\****, Lucy M. Aplin, and Fumihiro Kano
-
+**Michael Chimento\***, ***Alex Hoi Hang Chan\***, Lucy M. Aplin, and Fumihiro Kano
+**Bold denotes co-first authorship**.
 ![Banner](./media/3DSOCS_Banner.jpeg)
 
 ## Abstract
 
+> Collection of large behavioral data-sets on wild animals in natural habitats is vital to answering a range of questions in ecology and evolution. Modern sensor technologies, including GPS and passive transponder tags, have enhanced the scale and quality of behavioral data. Moreover, recent developments in machine learning and computer vision, combined with inexpensive and customizable microcomputers, have unlocked a new frontier of fine-scale measurements rivaling what is possible in controlled laboratory conditions. Here, we leverage these advancements to develop a 3D Synchronized Outdoor Camera System (3D-SOCS): an inexpensive, mobile and automated method for collecting fine-scale data on wild animals using sub-millisecond synchronized video frames from multiple Raspberry Pi controlled cameras. To test this system, we placed 3D-SOCS at a wild bird feeder with a stimulus presentation device. From this, machine learning and computer vision methods were applied to estimate 2D and 3D keypoints, object detection and 3D trajectory tracking for multiple individuals of different species. Accuracy tests demonstrate that we can estimate 3D postures of birds within a 3mm tolerance, enabling fine-scale behavioural quantification. We illustrate the research potential of 3D-SOCS by characterizing the visual field configuration of wild great tits (\textit{Parus major}), a model species in behavioral ecology. We find that birds have optic axes of approximately $\pm60\degree$ azimuth and $-5\degree$ elevation and exhibit individual differences in lateralization. We also show that by using the convex hull of birds to estimate body weight, 3D-SOCS can be used for non-invasive population monitoring. In summary, 3D-SOCS is a first-of-its-kind camera system for wild research, presenting exciting new potential to measure fine-scaled morphology and behaviour in wild birds.
+
 ## About
+This repository contains code/instructions for running our markerless tracking system 3DSOCS yourself, from the manuscript "Peering into the world of wild passerines with 3D-SOCS: synchronized video capture for posture estimation". To use our system, you must first capture frame-synchronized videos of birds (great tits and blue tits, as tested in our manuscript). This can be done using a network of inexpensive RaspberryPi Compute Module 4s and our custom software. Once you have video data, you can then send it through our pipeline to extract the 3D postures. The repository is thus split into two folders: one for video data collection (developed by Michael Chimento), and one for the 3D tracking pipeline (developed by Alex Chan). Each folder contains its own readme with further details. We also supply a parts list with prices/working links (as of June 2024).
 
-
+Directory  | Description
+------------- | -------------
+3D_SOCS_raspi | Python code and instructions for running 3DSOCS and collecting video data using RaspberryPi CM4, shell scripts for administration of system.
+3DTracking | Python code and instructions for 3D posture tracking pipeline from video data.
 
 ## Citation
 ```
