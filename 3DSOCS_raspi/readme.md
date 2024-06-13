@@ -1,7 +1,7 @@
 # Code for operating 3D-SOCS
 
 ![Banner](../media/Fig_SX_3DSOCS_hardware.png)
-<p style="text-align: center;">Diagram of hardware setup for 3DSOCS.</p>
+Diagram of hardware setup for 3DSOCS.
 
 ## Overview 
 Raspi CM4 are networked using a switch. Lead CM4 (pi0 in diagram) uses a GNSS module to acquire lead time. Follower CM4 synchronize their internal clocks with lead CM4. Custom encoder in Picamera script ```record_videos.py``` disciplines framerate to internal clock. Frames consistently achieve <1ms synchronization. Lead CM4 runs ```motion_detector.py``` to detect motion within setup. When motion is detected, a signal is sent using GPIO to all follower CM4, which start recording. Recordings last for a user defined amount of time (we used 60s). Once recordings having been recovered from the CM4, they must then be converted from .h264 to .mp4 format with associated frame-time metadata using ```convert_videos_to_mp4.py```. At this point, you can move to the 3D-tracking pipeline.
