@@ -21,12 +21,7 @@ equipment_list.ods | List of hardware used in the manuscript.
 
 ## Sample Video
 
-
-<figure class="video_container">
-  <iframe src="media/bird_3B00186CDA_trial_32_time_2023-11-05 10_30_28.117871_VisualField_sample.mp4" frameborder="0" allowfullscreen="true"> 
-</iframe>
-</figure>
-
+![sample video](./media/bird_3B00186CDA_trial_32_time_2023-11-05%2010_30_28.117871_VisualField_sample.mp4)
 
 ## Citation
 ```
