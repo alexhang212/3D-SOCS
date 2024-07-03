@@ -27,7 +27,17 @@ https://github.com/alexhang212/3D-SOCS/assets/57260510/006f1c26-f53f-4f06-b540-e
 
 ## Citation
 ```
-
+@article {Chimento2024Peering,
+	author = {Chimento, Michael and Chan, Alex Hoi Hang and Aplin, Lucy M. and Kano, Fumihiro},
+	title = {Peering into the world of wild passerines with 3D-SOCS: synchronized video capture and posture estimation},
+	elocation-id = {2024.06.30.601375},
+	year = {2024},
+	doi = {10.1101/2024.06.30.601375},
+	publisher = {Cold Spring Harbor Laboratory},
+	URL = {https://www.biorxiv.org/content/early/2024/07/02/2024.06.30.601375},
+	eprint = {https://www.biorxiv.org/content/early/2024/07/02/2024.06.30.601375.full.pdf},
+	journal = {bioRxiv}
+}
 ```
 ## Contact
 If you have any questions or problems with the code, feel free to raise a github issue or contact us!
