@@ -395,7 +395,7 @@ def AutoExtrinsicCalibrator(VideoPathList, DataDir, VideoName, ObjectDict, CamNa
         ReprojectErr.append(ret)
 
     # Find the best combination of extrinsic parameters
-    CamErrorList, BestParamDictList = []
+    CamErrorList, BestParamDictList = [],[]
     for x in range(len(CamNames)):
         BestParamsDict = GetBestCombination(ReprojectErr, outDictList, CamIndexPairs, CamNames, PrimaryCamera=x)
         BestParamDictList.append(BestParamsDict)
@@ -420,6 +420,8 @@ def AutoExtrinsicCalibrator(VideoPathList, DataDir, VideoName, ObjectDict, CamNa
         R, T = BestParamsDict[Cam]["R"], BestParamsDict[Cam]["T"]
         SavePath = os.path.join(DataDir, f"{Cam}_Initial_Extrinsics.p")
         pickle.dump((R, T), open(SavePath, "wb"))
+
+        
 
 def GetReprojectErrors(CamNames, DataDir, VideoName, Optimized=False):
     """Using detections, do triangulation across cams and do reprojection errors"""

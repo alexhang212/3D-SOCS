@@ -55,6 +55,10 @@ To get example annotations and visualization, run the following:
 ```
 python NetworkTraining/AnnotationReader.py
 ```
+
+By running this script, you will have image samples visualized on screen for all annotated data.
+
+
 ### Training networks
 We provide sample scripts for training the [YOLOv8](https://docs.ultralytics.com/) object detection model and [DeepLabCut](http://www.mackenziemathislab.org/deeplabcut#:~:text=DeepLabCut%E2%84%A2%20is%20an%20efficient,typically%2050%2D200%20frames) for 2D keypoint estimation.
 
