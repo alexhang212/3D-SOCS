@@ -107,8 +107,7 @@ Videos and associated metadata are written to the ```Videos``` directory of the 
 If you used 64 GB microSD cards, you should be able to comfortably record 1080p video for an entire day without having to move it onto external storage. Data management is largely the choice of the user. If desired, each CM4 could have its own external storage, and data could be directly written to this storage. Alternatively, the user could provide the lead CM4 with external storage, and use the supplied shell scripts to periodically move data onto this storage. Finally, the user could connect to the network switch with a laptop at the end of the day, and use the same script to pull videos onto their device. Once you have the data off of the system, it can then be fed into our 3D tracking pipeline detailed in the next section.
 
 Once you have pulled the files from the RPI onto your tower, you can run the ```convert_videos_to_mp4.py```. Make sure you manually enter the locations of where the raw data is stored, and where you would like the processed videos to be stored. The script will target specific dates, converting all ```.h264``` videos to ```.mp4```, inserting black frames whereever there has been a frame dropped.
-
-![Directory structure](../media/directory_structure.png "Directory structure")
+<img src="../media/directory_structure.png" alt="Directory structure" width="500"/>
 
 ### Practical details
 We strongly suggest to protect the electronics, as well as the camera cables, as wet cables introduce noise into the video signal. All electronics were housed in a plastic box which sat on top of the cage, protected by a roof fabricated from corrugated plastic and wood. We used two 10cm fans with passive heatsinks to cool the Rasperry Pis. Keeping the system cool is critical, as overheated computers increase the frame-drop rate and make synchronization significantly worse. Camera cables were protected with 2cm diameter plumbing tubes.
