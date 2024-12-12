@@ -149,7 +149,7 @@ def determine_frame_size(camera, focal_date):
     if video_files:
     
         try:
-            video_path = f"{RAW_DATA_PATH}/{focal_date}/{camera}/{video_files[5]}.h264"
+            video_path = f"{RAW_DATA_PATH}/{focal_date}/{camera}/{video_files[0]}.h264"
             stream = VideoGear(source=video_path).start()
             
         except Exception as e:
